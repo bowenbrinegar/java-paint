@@ -1,5 +1,8 @@
 package a8;
 
+import a8.Pixels.ColorPixel;
+import a8.Pixels.GrayPixel;
+
 public interface Pixel {
 
 	// These constants are standard relative intensity factors

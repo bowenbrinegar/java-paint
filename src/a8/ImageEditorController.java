@@ -1,5 +1,8 @@
 package a8;
 
+import a8.Pixels.Coordinate;
+import a8.Tools.*;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -11,14 +14,16 @@ public class ImageEditorController implements ToolChoiceListener, MouseListener,
 	private Tool current_tool;
 	private PixelInspectorTool inspector_tool;
 	private PaintBrushTool paint_brush_tool;
-	
-	public ImageEditorController(ImageEditorView view, ImageEditorModel model) {
+	private PickerTool color_picker_tool;
+
+	public ImageEditorController(ImageEditorView view, ImageEditorModel model) throws InterruptedException {
 		this.view = view;
 		this.model = model;
 
-		inspector_tool = new PixelInspectorTool(model);
+		inspector_tool = new PixelInspectorTool(model, this);
 		paint_brush_tool = new PaintBrushTool(model);
-		
+		color_picker_tool = new PickerTool(model, this);
+
 		view.addToolChoiceListener(this);
 		view.addMouseListener(this);
 		view.addMouseMotionListener(this);
@@ -34,7 +39,18 @@ public class ImageEditorController implements ToolChoiceListener, MouseListener,
 		} else if (tool_name.equals("Paint Brush")) {
 			view.installToolUI(paint_brush_tool.getUI());
 			current_tool = paint_brush_tool;
-		} 
+		} else if (tool_name.equals("Color Picker")) {
+			view.installToolUI(paint_brush_tool.getUI());
+			current_tool = color_picker_tool;
+		}
+	}
+
+	public void setInspectorBox(ObservablePicture p) {
+		view.updateInspectorBox(p, inspector_tool);
+	}
+
+	public void changeSliders(Pixel p) {
+		view.updateSliders(p, paint_brush_tool);
 	}
 
 	@Override

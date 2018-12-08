@@ -126,4 +126,43 @@ abstract public class PictureImpl implements Picture {
 	public SubPicture extract(int x, int y, int width, int height) {
 		return new SubPictureImpl(this, x, y, width, height);
 	}
+
+	private static Pixel findAverage(SubPicture pic, int x, int y, Pixel average) {
+		if (x + 3 < pic.getWidth()) {
+			Pixel blend = average.blend(pic.getPixel(x + 3, y), .5);
+			return findAverage(pic, x + 3, y, blend);
+		} else if (y + 3 < pic.getHeight()) {
+			Pixel blend = average.blend(pic.getPixel(x, y + 3), .5);
+			return findAverage(pic, x, y + 3, blend);
+		} else {
+			return average;
+		}
+	}
+
+	public Picture blur(int val, int _x, int _y, int radius, double blend_opacity, Pixel other) throws NoIntersectionException {
+		Picture _blurred = this;
+
+		int i;
+		int j;
+		for (i = _x; i < radius; i++) {
+			for (j =  _y; j < radius; j++) {
+				Pixel p = this.getPixel(i,j);
+				int half = val / 2;
+				int x = i - half > 0 ? i - half : 0;
+				int y = j - half > 0 ? j - half : 0;
+				int _delta_x = i + half < radius ? half : radius - i;
+				int _delta_y = j + half < radius ? half : radius - j;
+				_delta_x = _delta_x > 1 ? _delta_x : 1;
+				_delta_y = _delta_y > 1 ? _delta_y : 1;
+
+				SubPicture avgZone = new SubPictureImpl(this, x, y, _delta_x, _delta_y);
+
+				p = findAverage(avgZone, 0, 0, p);
+
+				_blurred.paint(i, j, p.blend(other, blend_opacity));
+			}
+		}
+
+		return _blurred;
+	}
 }

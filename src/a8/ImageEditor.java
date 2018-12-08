@@ -5,8 +5,8 @@ import java.awt.*;
 import java.io.IOException;
 
 public class ImageEditor {
-	public static void main(String[] args) throws IOException {
-		Picture f = Picture.readFromURL("http://www.cs.unc.edu/~kmp/kmp-in-namibia.jpg");
+	public static void main(String[] args) throws IOException, InterruptedException {
+		Picture f = Picture.readFromURL("http://brinegarphotography.businesscatalyst.com/images/0q1a4748-crop-u22940.jpg?crc=4052602086");
 
 		JFrame main_frame = new JFrame();
 		main_frame.setTitle("Assignment 8 Image Editor");
@@ -14,6 +14,9 @@ public class ImageEditor {
 
 		ImageEditorModel model = new ImageEditorModel(f);
 		ImageEditorView view = new ImageEditorView(main_frame, model);
+
+		model.addView(view);
+
  		ImageEditorController controller = new ImageEditorController(view, model);
 		
 

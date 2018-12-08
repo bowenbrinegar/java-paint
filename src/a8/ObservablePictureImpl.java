@@ -130,6 +130,13 @@ public class ObservablePictureImpl implements ObservablePicture {
 		return this;
 	}
 
+	public Picture blur(int val, int x, int y, int radius, double blend_opacity, Pixel other) throws NoIntersectionException {
+		_picture  = _picture.blur(val, x, y, radius, blend_opacity, other);
+
+		notifyObservers(new RegionImpl((int) (x-radius), (int) (y-radius), (int) (x+radius), (int) (y+radius)));
+		return this;
+	}
+
 	@Override
 	public String getCaption() {
 		return _picture.getCaption();
@@ -221,6 +228,11 @@ public class ObservablePictureImpl implements ObservablePicture {
 	public void resumeObservable() {
 		_suspended = false;
 		notifyObservers(_changed_region);
+	}
+
+	@Override
+	public Picture getPicture() {
+		return _picture;
 	}
 
 }

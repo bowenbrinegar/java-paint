@@ -84,6 +84,7 @@ public interface Picture {
 	public Picture paint(int x, int y, Picture p);
 	public Picture paint(int x, int y, Picture p, double factor);
 
+	public Picture blur(int val, int x, int y, int radius, double blend_opacity, Pixel other) throws NoIntersectionException;
 	// Get/set caption
 	public String getCaption();
 	public void setCaption(String caption);

@@ -1,4 +1,4 @@
-package a8;
+package a8.Tools;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,7 @@ public class ToolChooserWidget extends JPanel implements ItemListener {
 	private JComboBox tool_choices;
 	private List<ToolChoiceListener> listeners;
 
-	private static final String[] choices = {"Pixel Inspector", "Paint Brush"};
+	private static final String[] choices = {"Pixel Inspector", "Paint Brush", "Color Picker"};
 
 	public ToolChooserWidget() {
 		setLayout(new BorderLayout());

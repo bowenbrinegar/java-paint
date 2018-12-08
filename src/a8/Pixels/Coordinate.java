@@ -1,4 +1,4 @@
-package a8;
+package a8.Pixels;
 
 public class Coordinate {
 

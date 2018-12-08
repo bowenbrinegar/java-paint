@@ -3,7 +3,7 @@ package a8;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class PictureView extends Canvas implements ROIObserver {
+public class PictureView extends Canvas implements ROIObserver, PictureViewCanvas {
 
 	private ObservablePicture picture;
 	private BufferedImage buffered_image;
@@ -26,7 +26,7 @@ public class PictureView extends Canvas implements ROIObserver {
 		buffered_image = new BufferedImage(p.getWidth(), p.getHeight(), BufferedImage.TYPE_INT_RGB);
 		this.setPreferredSize(new Dimension(p.getWidth(), p.getHeight()));
 		this.setSize(new Dimension(p.getWidth(), p.getHeight()));
-		notify(picture, new RegionImpl(0,0,p.getWidth()-1,p.getHeight()-1));		
+		notify(picture, new RegionImpl(0,0,p.getWidth()-1,p.getHeight()-1));
 	}
 	
 	public ObservablePicture getPicture() {

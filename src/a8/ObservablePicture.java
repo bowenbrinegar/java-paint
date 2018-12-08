@@ -32,4 +32,6 @@ public interface ObservablePicture extends Picture {
 	// observing regions that intersect with the region that encompasses all paint
 	// operations that occurred while suspended.
 	void resumeObservable();
+
+	Picture getPicture();
 }
