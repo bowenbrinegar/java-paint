@@ -53,6 +53,11 @@ public class PaintBrushTool implements Tool, PaintTool {
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		model.paintAt(e.getX(), e.getY());
+		try {
+			model.blurAt(e.getX(), e.getY());
+		} catch (NoIntersectionException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	@Override
@@ -62,7 +67,7 @@ public class PaintBrushTool implements Tool, PaintTool {
 
 	@Override
 	public String getName() {
-		return "Paint Brush";
+		return "Paint Brush / Blur";
 	}
 
 	@Override

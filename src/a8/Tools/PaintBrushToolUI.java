@@ -100,7 +100,7 @@ public class PaintBrushToolUI extends JPanel implements ChangeListener {
 		JLabel blur_label = new JLabel("Blur: ");
 		blur_slider_panel.setLayout(new BorderLayout());
 		blur_slider_panel.add(blur_label, BorderLayout.WEST);
-		blur_slider = new JSlider(0,15);
+		blur_slider = new JSlider(0,50);
 		blur_slider.addChangeListener(this);
 		blur_slider_panel.add(blur_slider, BorderLayout.CENTER);
 

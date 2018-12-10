@@ -12,7 +12,7 @@ public class ToolChooserWidget extends JPanel implements ItemListener {
 	private JComboBox tool_choices;
 	private List<ToolChoiceListener> listeners;
 
-	private static final String[] choices = {"Pixel Inspector", "Paint Brush", "Color Picker"};
+	private static final String[] choices = {"Pixel Inspector", "Paint Brush / Blur", "Color Picker", "Copy / Paste"};
 
 	public ToolChooserWidget() {
 		setLayout(new BorderLayout());

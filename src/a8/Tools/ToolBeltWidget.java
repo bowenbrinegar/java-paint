@@ -37,7 +37,7 @@ public class ToolBeltWidget extends JPanel implements MouseListener {
 
 
         this.paste = new JButton();
-        paste.setText("Copy/Paste");
+        paste.setText("Copy");
         paste.addMouseListener(this);
 
 
@@ -67,6 +67,11 @@ public class ToolBeltWidget extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
         if (e.getSource().equals(circle)) {
             model.setCircle(true);
         } else if (e.getSource().equals(rectangle)) {
@@ -79,12 +84,13 @@ public class ToolBeltWidget extends JPanel implements MouseListener {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+        } else if (e.getSource().equals(paste)) {
+            if (model.getHasSelection()) {
+                model.setHasSelection(false);
+                model.createSubPicCopy();
+                model.replaceRect();
+            }
         }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
     }
 
     @Override

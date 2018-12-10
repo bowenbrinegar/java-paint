@@ -24,6 +24,8 @@ public class ImageEditor {
 		top_panel.setLayout(new BorderLayout());
 		top_panel.add(view, BorderLayout.CENTER);
 		main_frame.setContentPane(top_panel);
+		main_frame.setSize(new Dimension(f.getWidth() + 400, f.getHeight()));
+		main_frame.setPreferredSize(new Dimension(f.getWidth() + 400, f.getHeight()));
 
 		main_frame.pack();
 		main_frame.setVisible(true);

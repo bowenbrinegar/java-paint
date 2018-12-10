@@ -130,10 +130,24 @@ public class ObservablePictureImpl implements ObservablePicture {
 		return this;
 	}
 
-	public Picture blur(int val, int x, int y, int radius, double blend_opacity, Pixel other) throws NoIntersectionException {
-		_picture  = _picture.blur(val, x, y, radius, blend_opacity, other);
+	@Override
+	public Picture blur(int ax, int ay, int bx, int by, Pixel p, double factor, int blur_factor) {
+		_picture = _picture.blur(ax, ay, bx, by, p, factor, blur_factor);
 
-		notifyObservers(new RegionImpl((int) (x-radius), (int) (y-radius), (int) (x+radius), (int) (y+radius)));
+		int left = (ax < bx) ? ax : bx;
+		int right = (ax > bx) ? ax : bx;
+		int top = (ay < by) ? ay : by;
+		int bottom = (ay > by) ? ay : by;
+
+		notifyObservers(new RegionImpl(left, top, right, bottom));
+		return this;
+	}
+
+	@Override
+	public Picture blur(int cx, int cy, double radius, Pixel p, double factor, int blur_factor) {
+		_picture = _picture.blur(cx, cy, radius, p, factor, blur_factor);
+
+		notifyObservers(new RegionImpl((int) (cx-radius), (int) (cy-radius), (int) (cx+radius), (int) (cy+radius)));
 		return this;
 	}
 

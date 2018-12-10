@@ -1,6 +1,9 @@
 package a8;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 public class PictureView extends Canvas implements ROIObserver, PictureViewCanvas {
@@ -32,6 +35,8 @@ public class PictureView extends Canvas implements ROIObserver, PictureViewCanva
 	public ObservablePicture getPicture() {
 		return picture;
 	}
+
+	public BufferedImage getBuffered_image() {return buffered_image;}
 	
 	public void paint(Graphics g) {
 		g.drawImage(buffered_image, 0, 0, this);

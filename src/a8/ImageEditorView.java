@@ -4,10 +4,12 @@ import a8.Pixels.Coordinate;
 import a8.Tools.*;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.text.DecimalFormat;
 
 public class ImageEditorView extends JPanel {
@@ -20,15 +22,21 @@ public class ImageEditorView extends JPanel {
 	private JPanel toolbelt_widget;
 	private Canvas mag_ui;
 	private JTextField link_box;
-	
+	private SelectionBox selection_rect;
+	private JLayeredPane image_container;
+
 	public ImageEditorView(JFrame main_frame, ImageEditorModel model) {
 		this.main_frame = main_frame;
 		
 		setLayout(new BorderLayout());
-		
-		frame_view = new PictureView(model.getCurrent());
-		
-		add(frame_view, BorderLayout.CENTER);
+
+		image_container = new JLayeredPane();
+		frame_view = new PictureView(model.getCurrent());;
+
+		image_container.add(frame_view, 0, 1);
+		image_container.setSize(new Dimension(800, 1500));
+
+		add(image_container, BorderLayout.CENTER);
 		
 		tool_ui_panel = new JPanel();
 		tool_ui_panel.setLayout(new BorderLayout());
@@ -89,6 +97,162 @@ public class ImageEditorView extends JPanel {
 		frame_view.setPicture(p);
 		frame_view.revalidate();
 		frame_view.repaint();
+	}
+
+	public void removeRect() {
+		image_container.remove(selection_rect);
+	}
+
+	public void addRect() {
+		selection_rect = new SelectionBox(new Coordinate(0,0), 0, 0, this, model);
+		image_container.add(selection_rect,1, 2);
+	}
+
+	public void setRect(Coordinate c, int w, int h) {
+		selection_rect = new SelectionBox(c, w, h, this, model);
+		image_container.add(selection_rect,1, 2);
+	}
+
+	public void updateRect(Coordinate c, int w, int h) {
+		selection_rect.setBounds(c.getX(), c.getY(), w, h);
+		model.setWidthHeight(w, h);
+		selection_rect.revalidate();
+		selection_rect.repaint();
+	}
+
+	public void transportSelection() {
+		int w = model.getW();
+		int h = model.getH();
+
+		updateRect(model.getCoordinate(), w, h);
+	}
+
+	public void expandLeft() {
+		Coordinate c = model.getCoordinate();
+
+		int w = model.getW() + 3;
+		int h = model.getH();
+
+		int x = c.getX() - 3;
+		int y = c.getY();
+
+		selection_rect.setBounds(x, y, w, h);
+		model.setWidthHeight(w, h);
+		model.setMainCoordinate(new Coordinate(x,y));
+		selection_rect.revalidate();
+		selection_rect.repaint();
+	}
+
+	public void contractLeft() {
+		Coordinate c = model.getCoordinate();
+
+		int w = model.getW() - 3;
+		int h = model.getH();
+
+		int x = c.getX() + 3;
+		int y = c.getY();
+
+		selection_rect.setBounds(x, y, w, h);
+		model.setWidthHeight(w, h);
+		model.setMainCoordinate(new Coordinate(x,y));
+		selection_rect.revalidate();
+		selection_rect.repaint();
+	}
+
+	public void expandRight() {
+		Coordinate c = model.getCoordinate();
+
+		int w = model.getW() + 3;
+		int h = model.getH();
+
+		int x = c.getX();
+		int y = c.getY();
+
+		selection_rect.setBounds(x, y, w, h);
+		model.setWidthHeight(w, h);
+		model.setMainCoordinate(new Coordinate(x,y));
+		selection_rect.revalidate();
+		selection_rect.repaint();
+	}
+
+	public void contractRight() {
+		Coordinate c = model.getCoordinate();
+
+		int w = model.getW() - 3;
+		int h = model.getH();
+
+		int x = c.getX();
+		int y = c.getY();
+
+		selection_rect.setBounds(x, y, w, h);
+		model.setWidthHeight(w, h);
+		model.setMainCoordinate(new Coordinate(x,y));
+		selection_rect.revalidate();
+		selection_rect.repaint();
+	}
+
+	public void expandTop() {
+		Coordinate c = model.getCoordinate();
+
+		int w = model.getW();
+		int h = model.getH() + 3;
+
+		int x = c.getX();
+		int y = c.getY() - 3;
+
+		selection_rect.setBounds(x, y, w, h);
+		model.setWidthHeight(w, h);
+		model.setMainCoordinate(new Coordinate(x,y));
+		selection_rect.revalidate();
+		selection_rect.repaint();
+	}
+
+	public void contractTop() {
+		Coordinate c = model.getCoordinate();
+
+		int w = model.getW();
+		int h = model.getH() - 3;
+
+		int x = c.getX();
+		int y = c.getY() + 3;
+
+		selection_rect.setBounds(x, y, w, h);
+		model.setWidthHeight(w, h);
+		model.setMainCoordinate(new Coordinate(x,y));
+		selection_rect.revalidate();
+		selection_rect.repaint();
+	}
+
+	public void expandBottom() {
+		Coordinate c = model.getCoordinate();
+
+		int w = model.getW();
+		int h = model.getH() + 3;
+
+		int x = c.getX();
+		int y = c.getY();
+
+		selection_rect.setBounds(x, y, w, h);
+		model.setWidthHeight(w, h);
+		model.setMainCoordinate(new Coordinate(x,y));
+		selection_rect.revalidate();
+		selection_rect.repaint();
+	}
+
+	public void contractBottom() {
+		Coordinate c = model.getCoordinate();
+
+		int w = model.getW();
+		int h = model.getH() - 3;
+
+		int x = c.getX();
+		int y = c.getY();
+
+		selection_rect.setBounds(x, y, w, h);
+		model.setWidthHeight(w, h);
+		model.setMainCoordinate(new Coordinate(x,y));
+		selection_rect.revalidate();
+		selection_rect.repaint();
 	}
 
 	@Override

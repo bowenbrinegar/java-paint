@@ -15,6 +15,7 @@ public class ImageEditorController implements ToolChoiceListener, MouseListener,
 	private PixelInspectorTool inspector_tool;
 	private PaintBrushTool paint_brush_tool;
 	private PickerTool color_picker_tool;
+	private CopyPasteTool copy_paste;
 
 	public ImageEditorController(ImageEditorView view, ImageEditorModel model) throws InterruptedException {
 		this.view = view;
@@ -23,6 +24,7 @@ public class ImageEditorController implements ToolChoiceListener, MouseListener,
 		inspector_tool = new PixelInspectorTool(model, this);
 		paint_brush_tool = new PaintBrushTool(model);
 		color_picker_tool = new PickerTool(model, this);
+		copy_paste = new CopyPasteTool(model);
 
 		view.addToolChoiceListener(this);
 		view.addMouseListener(this);
@@ -36,12 +38,15 @@ public class ImageEditorController implements ToolChoiceListener, MouseListener,
 		if (tool_name.equals("Pixel Inspector")) {
 			view.installToolUI(inspector_tool.getUI());
 			current_tool = inspector_tool;
-		} else if (tool_name.equals("Paint Brush")) {
+		} else if (tool_name.equals("Paint Brush / Blur")) {
 			view.installToolUI(paint_brush_tool.getUI());
 			current_tool = paint_brush_tool;
 		} else if (tool_name.equals("Color Picker")) {
 			view.installToolUI(paint_brush_tool.getUI());
 			current_tool = color_picker_tool;
+		} else if (tool_name.equals("Copy / Paste")) {
+			view.setRect(new Coordinate(0,0), 0, 0);
+			current_tool = copy_paste;
 		}
 	}
 
