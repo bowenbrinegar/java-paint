@@ -1,4 +1,4 @@
-package a8.Tools;
+package a8;
 
 import a8.ImageEditorModel;
 import a8.ImageEditorView;

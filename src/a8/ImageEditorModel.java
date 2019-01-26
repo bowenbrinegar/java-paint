@@ -1,11 +1,7 @@
 package a8;
 
-import a8.Pixels.Coordinate;
-import a8.Tools.ImageTracker;
 
 import javax.swing.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

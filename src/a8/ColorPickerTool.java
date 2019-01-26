@@ -1,17 +1,14 @@
-package a8.Tools;
-
-import a8.*;
+package a8;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 
-public class PickerTool implements Tool {
+public class ColorPickerTool implements Tool {
     private ImageEditorModel model;
     private ImageEditorController controller;
 
-    public PickerTool(ImageEditorModel model, ImageEditorController controller) {
+    public ColorPickerTool(ImageEditorModel model, ImageEditorController controller) {
         this.model = model;
-        this.controller = controller;
     }
 
     @Override
@@ -31,9 +28,8 @@ public class PickerTool implements Tool {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        Pixel picked_color = model.getPixel(e.getX(), e.getY());
-        controller.changeSliders(picked_color);
-
+        Pixel p = model.getCurrent().getPixel(e.getX(), e.getY());
+        controller.changeSliders(p);
     }
 
     @Override

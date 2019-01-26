@@ -1,4 +1,4 @@
-package a8.Pixels;
+package a8;
 
 public interface AlphaPixel {
     public double getAlpha();

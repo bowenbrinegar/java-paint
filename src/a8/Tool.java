@@ -1,4 +1,4 @@
-package a8.Tools;
+package a8;
 
 import javax.swing.*;
 import java.awt.event.MouseListener;

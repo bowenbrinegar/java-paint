@@ -1,7 +1,5 @@
-package a8.Tools;
+package a8;
 
-import a8.*;
-import a8.Pixels.ColorPixel;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;

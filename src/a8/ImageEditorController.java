@@ -1,7 +1,5 @@
 package a8;
 
-import a8.Pixels.Coordinate;
-import a8.Tools.*;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

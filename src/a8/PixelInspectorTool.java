@@ -1,10 +1,7 @@
-package a8.Tools;
+package a8;
 
-import a8.*;
-import a8.Pixels.Coordinate;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseEvent;
 
 public class PixelInspectorTool implements Tool, InspectorTool {

@@ -1,9 +1,5 @@
-package a8.Tools;
+package a8;
 
-import a8.ImageEditor;
-import a8.ImageEditorModel;
-import a8.ImageEditorView;
-import a8.Pixels.Coordinate;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

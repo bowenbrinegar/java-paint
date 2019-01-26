@@ -1,16 +1,10 @@
 package a8;
 
-import a8.Pixels.Coordinate;
-import a8.Tools.*;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.text.DecimalFormat;
 
 public class ImageEditorView extends JPanel {
 	private JFrame main_frame;

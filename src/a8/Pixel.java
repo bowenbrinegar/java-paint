@@ -1,7 +1,5 @@
 package a8;
 
-import a8.Pixels.ColorPixel;
-import a8.Pixels.GrayPixel;
 
 public interface Pixel {
 

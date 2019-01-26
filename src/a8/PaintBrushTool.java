@@ -1,7 +1,4 @@
-package a8.Tools;
-
-import a8.ImageEditorModel;
-import a8.NoIntersectionException;
+package a8;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;

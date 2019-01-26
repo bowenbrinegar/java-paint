@@ -1,6 +1,4 @@
-package a8.Pixels;
-
-import a8.Pixel;
+package a8;
 
 public class ColorPixel implements Pixel, AlphaPixel {
 
